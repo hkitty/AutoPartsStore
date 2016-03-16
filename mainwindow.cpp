@@ -26,17 +26,40 @@ void MainWindow::on_pushButton_clicked()
         password = ui->passwordEdit->text();
 
         switch (isLogin(login, password)) {
-        case 0:
+        case 0: {
+            AdmWindow *aw = new AdmWindow();
+            aw->show();
             break;
-        case 254:
+        }
+        case 1: {
+            ManagerWindow *mw = new ManagerWindow();
+            mw->show();
+            break;
+        }
+        case 2: {
+            QFile file(login);
+            if (file.open(QIODevice::Append)) {
+                QTextStream out(&file);
+                out << "\n" << "Login on " << QDateTime::currentDateTime().toString();
+            }
+            file.close();
+
+            CashierWindow *cw = new CashierWindow(login);
+            cw->show();
+            break;
+        }
+        case 254: {
             QMessageBox::critical(0, "Login error", "User not found!");
             break;
-        case 255:
+        }
+        case 255: {
             QMessageBox::critical(0, "Database error", "Check database connection!");
             break;
-        default:
+        }
+        default: {
             QMessageBox::critical(0, "Login error", "Unknown error!");
             break;
+        }
         }
     } else {
         QMessageBox::critical(0, "Login error", "Fill in all the fields!");
@@ -59,8 +82,10 @@ int MainWindow::isLogin(QString userLogin, QString userPassword)
             return 254;
         } else {
             while ( loginQuery.next() ) {
+                qDebug()  << "Access rights: " << loginQuery.value(0).toInt();;
                 return loginQuery.value(0).toInt();
             }
         }
     }
+    return 254;
 }

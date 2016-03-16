@@ -4,6 +4,11 @@
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QtSql>
+#include <managerwindow.h>
+#include <admwindow.h>
+#include <cashierwindow.h>
+#include <QFile>
+#include <QDateTime>
 
 namespace Ui {
 class MainWindow;

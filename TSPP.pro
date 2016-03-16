@@ -13,8 +13,20 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    managerwindow.cpp \
+    admwindow.cpp \
+    dllg.cpp \
+    cashierwindow.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    managerwindow.h \
+    admwindow.h \
+    dllg.h \
+    cashierwindow.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    managerwindow.ui \
+    admwindow.ui \
+    dllg.ui \
+    cashierwindow.ui
